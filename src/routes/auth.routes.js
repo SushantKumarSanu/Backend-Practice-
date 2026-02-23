@@ -1,12 +1,11 @@
 import express from 'express';
+import { registerUser } from '../jwt-auth/controllers/auth.js';
 
 const router = express.Router();
 
 
 
-router.get('/register',(req,res)=>{
-    res.status(200).json({message:"Welcome to register"});
-});
+router.post('/register',registerUser);
 
 
 
