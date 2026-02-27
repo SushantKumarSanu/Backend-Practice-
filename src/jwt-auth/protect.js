@@ -1,5 +1,5 @@
-import jwt, { JsonWebTokenError } from "jsonwebtoken";
-import User from "../models/User";
+import jwt from "jsonwebtoken";
+import User from "../models/User.js";
 
 
 export const generateToken = (userId)=>{
