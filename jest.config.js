@@ -8,4 +8,6 @@ export default{
     "!**/node_modules/**",
   ],
   coveragePathIgnorePatterns: ["/node_modules/", "/__tests__/"],
+   forceExit: true,           
+  detectOpenHandles: true
 };
