@@ -41,6 +41,43 @@ describe('JWT AUTH - Auth Controller ',()=>{
             })
             expect(res.status).toBe(409);
             expect(res.body.message).toContain("User already exists.")
+        });
+    });
+    describe('POST /api/auth/login',()=>{
+        beforeEach(async () => {
+            await    request(app)
+            .post("/api/auth/register")    
+            .send({
+                username:"newuser",
+                email:"test@example.com",
+                password:"password4567"
+            });
+        });
+        test("should login with correct credentials", async () => {
+            const res = await request(app)
+            .post("/api/auth/login")
+            .send({
+                email:"test@example.com",
+                password:"password4567"
+            });
+            expect(res.status).toBe(200);
+            expect(res.body).toHaveProperty("token");
+            expect(res.body.message).toContain("login successfull");
+            expect(res.body.email).toBe("test@example.com");
+    
+      expect(res.status).toBe(200);
+      expect(res.body).toHaveProperty("token");
+ 
+        })
+        test("should reject wrong password", async() =>{
+            const res = await request(app)
+            .post("/api/auth/login")
+            .send({
+                 email:"test@example.com",
+                password:"password1234"
+            });
+            expect(res.status).toBe(401);
+            expect(res.body.message).toContain("You have entered wrong credentials");
         })
     })
 })
